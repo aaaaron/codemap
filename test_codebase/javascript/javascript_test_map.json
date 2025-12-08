@@ -1,0 +1,57 @@
+[
+  {
+    "Path": "test_js.js",
+    "Language": "javascript",
+    "Definitions": [
+      {
+        "type": "function",
+        "name": "greet",
+        "line_start": 8,
+        "line_end": 10,
+        "id": "a32990fa0e9254ffb3b2106716a107a1",
+        "signature": "function greet(name) { return `Hello, ${name}!`; }"
+      },
+      {
+        "type": "type",
+        "name": "Calculator",
+        "line_start": 15,
+        "line_end": 39,
+        "id": "86e3065857fdc90fb1fa5d924b012bad",
+        "definition": "class Calculator { constructor() { this.result = 0; } /** * Adds two numbers * @param {number} x - First number * @param {number} y - Second number * @returns {number} The sum */ add(x, y) { return x + y; } /** * Multiplies two numbers * @param {number} x - First number * @param {number} y - Second number * @returns {number} The product */ multiply(x, y) { return x * y; } }"
+      },
+      {
+        "type": "function",
+        "name": "constructor",
+        "line_start": 16,
+        "line_end": 18,
+        "id": "b54cfb0a47e600ea4532bb825ef0bb9b",
+        "signature": "constructor() { this.result = 0; }"
+      },
+      {
+        "type": "function",
+        "name": "add",
+        "line_start": 26,
+        "line_end": 28,
+        "id": "4ac7e6e700159396bd98efe996e11e7d",
+        "signature": "add(x, y) { return x + y; }"
+      },
+      {
+        "type": "function",
+        "name": "multiply",
+        "line_start": 36,
+        "line_end": 38,
+        "id": "5a1b48f7710dd1027e1d438ba91109d8",
+        "signature": "multiply(x, y) { return x * y; }"
+      },
+      {
+        "type": "function",
+        "name": "sayHello",
+        "line_start": 42,
+        "line_end": 42,
+        "id": "00aa3007b8ea499bbadc0e8cec3a0837",
+        "signature": "const sayHello = (name) =\u003e `Hello, ${name}!`;",
+        "comment": " Arrow function example"
+      }
+    ]
+  }
+]
