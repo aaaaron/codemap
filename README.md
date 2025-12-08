@@ -34,6 +34,47 @@ Generate a map for the current directory:
 ./bin/codemap --format json --output-dir ./maps
 ```
 
+
+## Agent Prompt
+
+### Codemap Navigation Tool
+
+Your workspace includes generated codemap files in [`codemap_output/`](codemap_output/) that provide a structured index of the codebase. These JSONL files enable rapid code navigation without reading entire files.
+
+**Available Maps:**
+- `backend_map.jsonl` - Go backend code definitions  
+- `frontend_map.jsonl` - TypeScript/JavaScript frontend code
+
+**Key Fields:**
+- `name` - Function/type/class name
+- `type` - "function", "type", "class", etc.
+- `file` - File path (relative to workspace)
+- `line_start`/`line_end` - Exact location in source
+- `signature` - Full function/method signature
+- `definition` - Type/class definition
+- `doc` - Documentation comment
+
+**Quick Search Examples:**
+
+Find definitions by name:
+```bash
+grep '"name":"JSParser"' codemap_output/backend_map.jsonl
+```
+
+Find all functions in a file:
+```bash
+grep 'cmd/codemap/main.go' codemap_output/backend_map.jsonl | grep '"type":"function"'
+```
+
+Search documentation/comments:
+```bash
+grep -i "authentication" codemap_output/backend_map.jsonl
+```
+
+**Tool Access:** Use [`read_file`](read_file) on codemap files for programmatic parsing. Each line is a complete JSON object with all definition metadata.
+
+**When to Use:** Query codemap before reading source files to locate exact implementations, understand module structure, or find related code sections.
+
 ## Configuration (`.codemap`)
 
 The `.codemap` file allows you to define named sections of your codebase. This is useful for generating separate maps for different parts of your application.
