@@ -133,3 +133,14 @@ make build
 ```bash
 make test
 ```
+
+## TODO
+
+1. [ ] `internal/types/types.go` - Define data structures for config, sections, definitions, and file maps
+2. [ ] `internal/config/config.go` - Implement YAML configuration loading
+3. [ ] `internal/walker/walker.go` - Implement directory walking with include/exclude patterns
+4. [ ] `internal/parser/parser.go` - Define parser interface and factory
+5. [ ] `internal/parser/go_parser.go` - Implement Go source file parsing using AST
+6. [ ] `internal/parser/js_parser.go` - Implement JavaScript/TypeScript parsing (improve regex or use library)
+7. [ ] `internal/output/output.go` - Implement XML, JSON, and YAML output generation
+8. [ ] `cmd/codemap/main.go` - Integrate all components in main CLI logic
