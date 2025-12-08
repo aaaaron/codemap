@@ -1,0 +1,7 @@
+version: "1.0"
+sections:
+  - name: "python_test"
+    path: "python_test_map"
+    include:
+      - "*.py"
+    exclude: []

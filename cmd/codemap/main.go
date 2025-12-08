@@ -92,6 +92,8 @@ func parseFiles(files []string) []types.FileMap {
 			lang = "javascript"
 		} else if filepath.Ext(file) == ".ts" {
 			lang = "typescript"
+		} else if filepath.Ext(file) == ".py" {
+			lang = "python"
 		}
 
 		fileMaps = append(fileMaps, types.FileMap{

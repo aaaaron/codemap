@@ -1,0 +1,7 @@
+version: "1.0"
+sections:
+  - name: "go_test"
+    path: "go_test_map"
+    include:
+      - "*.go"
+    exclude: []

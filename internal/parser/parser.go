@@ -30,5 +30,8 @@ func GetParser(filePath string) Parser {
 	if strings.HasSuffix(filePath, ".js") || strings.HasSuffix(filePath, ".ts") {
 		return &JSParser{}
 	}
+	if strings.HasSuffix(filePath, ".py") {
+		return &PythonParser{}
+	}
 	return nil
 }

@@ -7,8 +7,8 @@ The goal is to provide an LLM with a high-level overview of the codebase's struc
 ## Features
 
 -   **Multi-Language Support:** Parses common programming languages to extract code definitions.
-    -   Initial support: Go, JavaScript, TypeScript.
-    -   Planned support: Python, Java, C#, Rust, PHP, Ruby, Swift, Kotlin, C/C++.
+    -   Support: Go, JavaScript, TypeScript, Python.
+    -   Planned support: Java, C#, Rust, PHP, Ruby, Swift, Kotlin, C/C++.
 -   **Context-Rich Output:** Extracts not just names, but signatures and preceding comments/documentation.
 -   **LLM-Friendly Formats:** Outputs data in XML (default), YAML, or JSON, optimized for LLM parsing.
 -   **Configurable Scoping:** Supports defining "map sections" via a configuration file to split large codebases into logical chunks (e.g., Frontend, Backend).
@@ -103,6 +103,15 @@ sections:
     exclude:
       - "node_modules/**"
       - "**/*.spec.ts"
+
+  - name: "python"
+    path: "python_map.xml"
+    include:
+      - "**/*.py"
+    exclude:
+      - "**/__pycache__/**"
+      - "**/*.pyc"
+      - "**/venv/**"
 ```
 
 ## Output Format
