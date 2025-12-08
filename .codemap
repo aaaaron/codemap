@@ -1,0 +1,21 @@
+version: "1.0"
+sections:
+  - name: "backend"
+    path: "backend_map.xml"
+    include:
+      - "cmd/**/*.go"
+      - "internal/**/*.go"
+      - "pkg/**/*.go"
+    exclude:
+      - "**/*_test.go"
+      - "vendor/**"
+
+  - name: "frontend"
+    path: "frontend_map.xml"
+    include:
+      - "src/**/*.ts"
+      - "src/**/*.tsx"
+      - "src/**/*.js"
+    exclude:
+      - "node_modules/**"
+      - "**/*.spec.ts"

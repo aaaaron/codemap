@@ -1,0 +1,4 @@
+- Read the README.md to understand the project
+- Always use `make` to build and test the code
+- Don't recap the features of the product or summarize benefits
+- Don't use definitive language regarding the success of changes
