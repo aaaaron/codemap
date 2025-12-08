@@ -5,17 +5,18 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
-	"github.com/yourusername/codemap/internal/config"
-	"github.com/yourusername/codemap/internal/output"
-	"github.com/yourusername/codemap/internal/parser"
-	"github.com/yourusername/codemap/internal/types"
-	"github.com/yourusername/codemap/internal/walker"
+	"codemap/internal/config"
+	"codemap/internal/output"
+	"codemap/internal/parser"
+	"codemap/internal/types"
+	"codemap/internal/walker"
 )
 
 func main() {
 	// Define flags
-	format := flag.String("format", "xml", "Output format: xml, json, or yaml")
+	format := flag.String("format", "jsonl", "Output format: xml, json, jsonl, or yaml")
 	configPath := flag.String("config", ".codemap", "Path to configuration file")
 	outputDir := flag.String("output-dir", "codemap_output", "Directory to write output files")
 
@@ -107,6 +108,9 @@ func generateOutput(files []types.FileMap, format, outputPath string) {
 	var content string
 	var err error
 
+	// Remove any existing extension
+	outputPath = strings.TrimSuffix(outputPath, filepath.Ext(outputPath))
+
 	switch format {
 	case "xml":
 		content, err = output.GenerateXML(files)
@@ -114,6 +118,9 @@ func generateOutput(files []types.FileMap, format, outputPath string) {
 	case "json":
 		content, err = output.GenerateJSON(files)
 		outputPath += ".json"
+	case "jsonl":
+		content, err = output.GenerateJSONL(files)
+		outputPath += ".jsonl"
 	case "yaml":
 		content, err = output.GenerateYAML(files)
 		outputPath += ".yaml"

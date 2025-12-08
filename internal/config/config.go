@@ -5,7 +5,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/yourusername/codemap/internal/types"
+	"codemap/internal/types"
 )
 
 // LoadConfig reads and parses the .codemap YAML configuration file
