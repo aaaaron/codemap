@@ -16,5 +16,9 @@ clean:
 	@echo "Cleaning..."
 	@rm -rf $(BUILD_DIR)
 
+install:
+	@echo "Installing with \`go install\`"
+	@go install ./cmd/codemap
+
 run: build
 	@./$(BUILD_DIR)/$(BINARY_NAME)
