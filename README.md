@@ -124,7 +124,6 @@ sections:
 
 ## Example Output
 ```json
-cat backend_map.json | jq . | more
 cat codemap_output/backend_map.jsonl | jq . | more
 {
   "file": "cmd/codemap/main.go",
