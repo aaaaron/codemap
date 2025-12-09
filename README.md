@@ -122,6 +122,37 @@ sections:
       - "**/venv/**"
 ```
 
+## Example Output
+```json
+cat backend_map.json | jq . | more
+[
+  {
+    "Path": "cmd/codemap/main.go",
+    "Language": "go",
+    "Definitions": [
+      {
+        "type": "function",
+        "name": "main",
+        "line": 17,
+        "signature": "func main()"
+      },
+      {
+        "type": "function",
+        "name": "parseFiles",
+        "line": 74,
+        "signature": "func parseFiles(files []string) []types.FileMap",
+        "comment": "parseFiles parses the given files and returns file maps"
+      },
+      {
+        "type": "function",
+        "name": "generateOutput",
+        "line": 107,
+        "signature": "func generateOutput(files []types.FileMap, format, outputPath string)",
+        "comment": "generateOutput writes the output in the specified format"
+      }
+    ]
+  },
+```
 ## Development
 
 ### Prerequisites
