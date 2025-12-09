@@ -125,33 +125,42 @@ sections:
 ## Example Output
 ```json
 cat backend_map.json | jq . | more
-[
-  {
-    "Path": "cmd/codemap/main.go",
-    "Language": "go",
-    "Definitions": [
-      {
-        "type": "function",
-        "name": "main",
-        "line": 17,
-        "signature": "func main()"
-      },
-      {
-        "type": "function",
-        "name": "parseFiles",
-        "line": 74,
-        "signature": "func parseFiles(files []string) []types.FileMap",
-        "comment": "parseFiles parses the given files and returns file maps"
-      },
-      {
-        "type": "function",
-        "name": "generateOutput",
-        "line": 107,
-        "signature": "func generateOutput(files []types.FileMap, format, outputPath string)",
-        "comment": "generateOutput writes the output in the specified format"
-      }
-    ]
-  },
+cat codemap_output/backend_map.jsonl | jq . | more
+{
+  "file": "cmd/codemap/main.go",
+  "id": "28888ed04b723881ae24c690ba398854",
+  "language": "go",
+  "line_end": 71,
+  "line_start": 17,
+  "name": "main",
+  "searchable_text": "main cmd/codemap func main() go golang",
+  "signature": "func main()",
+  "type": "function"
+}
+{
+  "doc": "parseFiles parses the given files and returns file maps",
+  "file": "cmd/codemap/main.go",
+  "id": "b78cfbc75a34e4ff946036feeda6a0fc",
+  "language": "go",
+  "line_end": 106,
+  "line_start": 74,
+  "name": "parseFiles",
+  "searchable_text": "parsefiles main cmd/codemap parses the given files and returns file maps func parsefiles(files []string) []types.filemap go golang parser parsing loader",
+  "signature": "func parseFiles(files []string) []types.FileMap",
+  "type": "function"
+}
+{
+  "doc": "generateOutput writes the output in the specified format",
+  "file": "cmd/codemap/main.go",
+  "id": "0326df85e9ca3b85d61a818fa7c6d885",
+  "language": "go",
+  "line_end": 146,
+  "line_start": 109,
+  "name": "generateOutput",
+  "searchable_text": "generateoutput main cmd/codemap writes the output in specified format func generateoutput(files []types.filemap, format, outputpath string) go golang",
+  "signature": "func generateOutput(files []types.FileMap, format, outputPath string)",
+  "type": "function"
+}
 ```
 ## Development
 
