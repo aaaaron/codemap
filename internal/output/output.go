@@ -80,19 +80,19 @@ func GenerateYAML(files []types.FileMap) (string, error) {
 func buildSearchableText(def types.Definition, filePath, language string) string {
 	var tokens []string
 
-	name := def.Name
+	name := strings.ToLower(def.Name)
 
 	// 1. Symbol name — duplicate 2-3x
 	tokens = append(tokens, name)
 	tokens = append(tokens, name)
-	if unicode.IsUpper(rune(name[0])) { // thrice if public/exported
+	if unicode.IsUpper(rune(def.Name[0])) { // thrice if public/exported
 		tokens = append(tokens, name)
 	}
 
 	// 2. File context
-	base := strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
+	base := strings.ToLower(strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath)))
 	tokens = append(tokens, base)
-	dir := filepath.Dir(filePath)
+	dir := strings.ToLower(filepath.Dir(filePath))
 	if dir != "." {
 		tokens = append(tokens, dir)
 	}
@@ -115,7 +115,7 @@ func buildSearchableText(def types.Definition, filePath, language string) string
 	}
 
 	// 6. Language tags
-	switch language {
+	switch strings.ToLower(language) {
 	case "go":
 		tokens = append(tokens, "go", "golang")
 	case "javascript":
@@ -125,7 +125,7 @@ func buildSearchableText(def types.Definition, filePath, language string) string
 	}
 
 	// 7. Role/intent tags
-	nameLower := strings.ToLower(name)
+	nameLower := name
 	docLower := strings.ToLower(def.Comment)
 
 	containsAny := func(s string, words []string) bool {
@@ -149,7 +149,7 @@ func buildSearchableText(def types.Definition, filePath, language string) string
 	if containsAny(nameLower, []string{"handle", "route", "endpoint", "http"}) {
 		tokens = append(tokens, "http-handler", "route", "endpoint")
 	}
-	if unicode.IsUpper(rune(name[0])) {
+	if unicode.IsUpper(rune(def.Name[0])) {
 		tokens = append(tokens, "public", "api", "exported")
 	}
 
@@ -157,7 +157,19 @@ func buildSearchableText(def types.Definition, filePath, language string) string
 	raw := strings.Join(tokens, " ")
 	re := regexp.MustCompile(`\s+`)
 	raw = re.ReplaceAllString(raw, " ")
-	return strings.TrimSpace(raw)
+	raw = strings.TrimSpace(raw)
+
+	// Remove duplicate words
+	words := strings.Fields(raw)
+	seen := make(map[string]bool)
+	var unique []string
+	for _, word := range words {
+		if !seen[word] {
+			seen[word] = true
+			unique = append(unique, word)
+		}
+	}
+	return strings.Join(unique, " ")
 }
 
 // GenerateJSONL converts file maps to JSONL string (each definition on its own line)

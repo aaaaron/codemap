@@ -1,8 +1,14 @@
+```ansi
+               _                                                   
+  ___ ___   __| | ___ _ __ ___   __ _ _ __  
+ / __/ _ \ / _` |/ _ \ '_ ` _ \ / _` | '_ \ 
+| (_| (_) | (_| |  __/ | | | | | (_| | |_) |
+ \___\___/ \__,_|\___|_| |_| |_|\__,_| .__/     
+                                     |_|
+```                                     
 # Codemap
 
-Codemap is a CLI tool designed to generate a structured map of your codebase, specifically tailored for consumption by Large Language Models (LLMs). It parses source code files to extract function definitions, method signatures, and type definitions, along with their associated documentation comments.
-
-The goal is to provide an LLM with a high-level overview of the codebase's structure and available functionality without needing to ingest the entire source code, enabling more efficient context retrieval and navigation.
+Codemap is a CLI tool designed to generate a structured map of your codebase, specifically tailored for consumption by Large Language Models (LLMs). It parses source code files to extract function definitions, method signatures, and type definitions, along with their associated documentation comments.  It's designed to be baked into the build process. The goal is to provide an LLM with a high-level overview of the codebase's structure and available functionality without needing to ingest the entire source code, enabling more efficient context retrieval and navigation.
 
 ## Features
 
@@ -18,6 +24,9 @@ The goal is to provide an LLM with a high-level overview of the codebase's struc
 
 ### Basic Usage
 
+1. Add `codemap` to your build process
+2. Add the 'Agent Prompt' to your AGENTS.md or similar
+
 Generate a map for the current directory:
 
 ```bash
@@ -26,7 +35,7 @@ Generate a map for the current directory:
 
 ### Options
 
--   `--format`: Output format. `xml` (default) or `json`.
+-   `--format`: Output format. `jsonl` (default) or `xml`.
 -   `--config`: Path to configuration file. Defaults to `.codemap` in the current directory.
 -   `--output-dir`: Directory to write output files. Defaults to `codemap_output`.
 
@@ -34,12 +43,11 @@ Generate a map for the current directory:
 ./bin/codemap --format json --output-dir ./maps
 ```
 
-
 ## Agent Prompt
 
 ### Codemap Navigation Tool
 
-Your workspace includes generated codemap files in [`codemap_output/`](codemap_output/) that provide a structured index of the codebase. These JSONL files enable rapid code navigation without reading entire files.
+Your workspace includes generated codemap files in [`codemap_output/`](codemap_output/) that provide a structured index of the codebase. Used these files to find relevant functions fast.
 
 **Available Maps:**
 - `backend_map.jsonl` - Go backend code definitions  
@@ -112,57 +120,6 @@ sections:
       - "**/__pycache__/**"
       - "**/*.pyc"
       - "**/venv/**"
-```
-
-## Output Format
-
-### XML (Default)
-
-```xml
-<codemap>
-  <file path="internal/auth/auth.go" language="go">
-    <function name="Login" line="45">
-      <signature>func Login(ctx context.Context, req LoginRequest) (*LoginResponse, error)</signature>
-      <comment>
-        Login authenticates a user with the provided credentials.
-        It returns a session token if successful.
-      </comment>
-    </function>
-    <type name="LoginRequest" line="30">
-      <definition>type LoginRequest struct { ... }</definition>
-      <comment>LoginRequest holds the credentials for a login attempt.</comment>
-    </type>
-  </file>
-</codemap>
-```
-
-### JSON
-
-```json
-{
-  "files": [
-    {
-      "path": "internal/auth/auth.go",
-      "language": "go",
-      "definitions": [
-        {
-          "type": "function",
-          "name": "Login",
-          "line": 45,
-          "signature": "func Login(ctx context.Context, req LoginRequest) (*LoginResponse, error)",
-          "comment": "Login authenticates a user with the provided credentials.\nIt returns a session token if successful."
-        },
-        {
-          "type": "type",
-          "name": "LoginRequest",
-          "line": 30,
-          "definition": "type LoginRequest struct { ... }",
-          "comment": "LoginRequest holds the credentials for a login attempt."
-        }
-      ]
-    }
-  ]
-}
 ```
 
 ## Development
