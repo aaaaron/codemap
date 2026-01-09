@@ -16,7 +16,7 @@ type Parser interface {
 
 // computeId generates a stable MD5 hash ID for a definition based on file path, name, and content
 func computeId(filePath, name, content string) string {
-	h := md5.New()
+	h := md5.New() // snyk:ignore:insecure-hash deepcode ignore InsecureHash: MD5 used for non-cryptographic identifier generation, not security
 	h.Write([]byte(filePath + "|" + name + "|" + content))
 	return fmt.Sprintf("%x", h.Sum(nil))
 }
